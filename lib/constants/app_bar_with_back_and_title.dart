@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
-AppBar appBarWithBackArrowAndTitle({context, text, icon = '', onPressed}) {
+AppBar appBarWithBackArrowAndTitle(
+    {context, text, icon = '', onPressed, onDownloadAction}) {
   return AppBar(
     leading: Padding(
       padding: const EdgeInsets.only(left: defaultPadding, top: defaultPadding),
@@ -31,5 +32,12 @@ AppBar appBarWithBackArrowAndTitle({context, text, icon = '', onPressed}) {
         ],
       ),
     ),
+    actions: [
+      onDownloadAction == null
+          ? Container()
+          : IconButton(
+              onPressed: onDownloadAction,
+              icon: const Icon(Icons.download_rounded))
+    ],
   );
 }

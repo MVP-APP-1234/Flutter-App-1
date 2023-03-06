@@ -20,7 +20,8 @@ class SocialIconWithButton extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: ((context) => ScreenHome(
-                userName: FirebaseAuth.instance.currentUser!.displayName)),
+                userName: FirebaseAuth.instance.currentUser!.displayName ??
+                    FirebaseAuth.instance.currentUser!.email)),
           ),
           (route) => false);
     }

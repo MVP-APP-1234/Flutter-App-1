@@ -67,7 +67,12 @@ class _PaymentState extends State<Payment> {
                   ],
                 ),
                 const SizedBox(height: defaultPadding * 2),
-                GradiantButtonWithText(title: 'Done', onPressed: () {}),
+                GradiantButtonWithText(
+                  title: 'Done',
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

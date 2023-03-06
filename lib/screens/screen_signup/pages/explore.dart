@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/constants.dart';
+import 'package:flutter_application_1/screens/screen_home/screen_home.dart';
 
 import '../../../../widgets/gradiant_button_with_text.dart';
 
@@ -38,10 +39,14 @@ class Explore extends StatelessWidget {
                 ),
                 const SizedBox(height: defaultPadding * 5),
                 GradiantButtonWithText(
-                    title: 'Check Your E-mail',
+                    title: 'Explore Now',
                     onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/home', (route) => false);
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ScreenHome(userName: 'Username')),
+                          (route) => false);
                     }),
                 const SizedBox(
                   height: defaultPadding - 10,

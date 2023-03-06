@@ -8,12 +8,25 @@ import '../../../../widgets/gradiant_button_with_text.dart';
 import 'email_verification.dart';
 
 // ignore: must_be_immutable
-class UsernameTextField extends StatelessWidget {
-  UsernameTextField({
+class UsernameTextField extends StatefulWidget {
+  const UsernameTextField({
     Key? key,
-    required this.currentIndex,
   }) : super(key: key);
+
+  @override
+  State<UsernameTextField> createState() => _UsernameTextFieldState();
+}
+
+class _UsernameTextFieldState extends State<UsernameTextField> {
+  TextEditingController textController = TextEditingController();
   int currentIndex = 2;
+
+  @override
+  void dispose() {
+    super.dispose();
+    textController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,13 +48,23 @@ class UsernameTextField extends StatelessWidget {
                 const SizedBox(height: defaultPadding),
                 Heading('Let\'s pick you a username !'),
                 const SizedBox(height: defaultPadding),
-                TextField(
-                  decoration: defaultTextFieldDecoration('Username'),
+                TextFormField(
+                  controller: textController,
+                  decoration: defaultTextFieldDecoration(
+                    'Username',
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        textController.clear();
+                      },
+                      child: Image.asset('assets/icons/reset_icon.png'),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: defaultPadding),
                 GradiantButtonWithText(
                   title: 'Done',
                   onPressed: () {
+                    FocusManager.instance.primaryFocus!.unfocus();
                     Navigator.push(
                       context,
                       MaterialPageRoute(

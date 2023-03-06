@@ -5,7 +5,8 @@ import 'package:page_transition/page_transition.dart';
 
 import 'constants.dart';
 
-PreferredSize appBarWithSearchAndNotification(BuildContext context) {
+PreferredSize appBarWithSearchAndNotification(BuildContext context, userName) {
+  Size size = MediaQuery.of(context).size;
   return PreferredSize(
     preferredSize: const Size(double.infinity, 70),
     child: Padding(
@@ -17,7 +18,7 @@ PreferredSize appBarWithSearchAndNotification(BuildContext context) {
               context,
               PageTransition(
                 type: PageTransitionType.leftToRight,
-                child: const ScreenSideMenu(),
+                child: ScreenSideMenu(userName: userName),
                 duration: const Duration(milliseconds: 500),
                 reverseDuration: const Duration(milliseconds: 500),
               ),
@@ -29,8 +30,10 @@ PreferredSize appBarWithSearchAndNotification(BuildContext context) {
           ),
         ),
         title: Container(
+          margin: size.width > 500
+              ? const EdgeInsets.symmetric(horizontal: 60)
+              : const EdgeInsets.symmetric(horizontal: 0),
           height: 40,
-          width: 250,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey.shade300,

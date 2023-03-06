@@ -13,6 +13,7 @@ class TitleTextWithImage extends StatelessWidget {
   final String? userName;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Row(
       children: [
         Column(
@@ -20,9 +21,9 @@ class TitleTextWithImage extends StatelessWidget {
           children: [
             AppText(title: 'Hello $userName,'),
             const SizedBox(height: defaultPadding * 0.5),
-            const AppText(
+            AppText(
               title: 'How may i help you \ntoday ?',
-              size: 20,
+              size: size.width < 300 ? 12 : 20,
               fontWeight: FontWeight.bold,
             ),
           ],
@@ -30,7 +31,7 @@ class TitleTextWithImage extends StatelessWidget {
         const Spacer(),
         Image.asset(
           'assets/images/robot.png',
-          height: defaultPadding * 6,
+          height: size.width < 300 ? defaultPadding * 3 : defaultPadding * 6,
         ),
       ],
     );

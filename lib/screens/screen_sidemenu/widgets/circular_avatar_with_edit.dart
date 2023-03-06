@@ -11,7 +11,8 @@ class CircularAvatarWithEdit extends StatelessWidget {
     required this.phoneNumber,
     this.onPressed,
   }) : super(key: key);
-  final String image, name, phoneNumber;
+  final String? name;
+  final String image, phoneNumber;
   // ignore: prefer_typing_uninitialized_variables
   final onPressed;
   @override

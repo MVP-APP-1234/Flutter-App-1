@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../constants/constants.dart';
 import '../../../../widgets/app_text.dart';
 import '../../../../widgets/image_with_text_box.dart';
-import '../pages/facebook_status_1.dart';
+import '../pages/facebook_status.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -11,19 +11,20 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      height: size.height * 0.9,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: defaultPadding + 10),
-          const AppText(
-            title: 'What do you want to create ?',
-            size: 20,
-            fontWeight: FontWeight.bold,
-          ),
-          const SizedBox(height: defaultPadding + 10),
-          Expanded(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: defaultPadding + 10),
+        const AppText(
+          title: 'What do you want to create ?',
+          size: 20,
+          fontWeight: FontWeight.bold,
+        ),
+        const SizedBox(height: defaultPadding + 10),
+        Center(
+          child: SizedBox(
+            height: size.height,
+            width: size.width < 500 ? size.width * 0.9 : size.width * 0.8,
             child: GridView.count(
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
@@ -37,7 +38,7 @@ class Body extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const FaceBookStatus1(),
+                        builder: (context) => const FaceBookStatus(),
                       ),
                     );
                   },
@@ -73,8 +74,8 @@ class Body extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

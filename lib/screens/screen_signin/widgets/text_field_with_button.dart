@@ -21,7 +21,7 @@ class TextFieldWithButton extends StatefulWidget {
 class _TextFieldWithButtonState extends State<TextFieldWithButton> {
   TextEditingController emailController = TextEditingController(),
       passwordController = TextEditingController();
-
+  bool isLoading = false;
   @override
   void dispose() {
     super.dispose();
@@ -29,7 +29,7 @@ class _TextFieldWithButtonState extends State<TextFieldWithButton> {
     passwordController.dispose();
   }
 
-  void signIn(AuthProvider provider) async {
+  signIn(AuthProvider provider) async {
     final result =
         await provider.signIn(emailController.text, passwordController.text);
     if (result == '') {
@@ -38,11 +38,21 @@ class _TextFieldWithButtonState extends State<TextFieldWithButton> {
           context,
           MaterialPageRoute(
               builder: (context) => ScreenHome(
-                  userName: FirebaseAuth.instance.currentUser!.displayName)),
+                  userName: FirebaseAuth.instance.currentUser!.displayName ??
+                      FirebaseAuth.instance.currentUser!.email)),
           (route) => false);
+    } else {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 1),
+        margin: EdgeInsets.all(10),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
+        content: Text('No user found for that email.'),
+      ));
     }
-    // ignore: avoid_print
-    print(result);
   }
 
   @override
@@ -58,6 +68,7 @@ class _TextFieldWithButtonState extends State<TextFieldWithButton> {
           const SizedBox(height: defaultPadding - 5),
           TextFormField(
             controller: emailController,
+            keyboardType: TextInputType.emailAddress,
             decoration: defaultTextFieldDecoration('Enter your e-mail address'),
             validator: (value) {
               if (value == null || !validator.email(value)) {
@@ -91,14 +102,25 @@ class _TextFieldWithButtonState extends State<TextFieldWithButton> {
             ),
           ),
           const SizedBox(height: defaultPadding * 1.3),
-          GradiantButtonWithText(
-            title: 'Log In',
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                signIn(authProvider);
-              }
-            },
-          )
+          isLoading == true
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.lightBlue,
+                  ),
+                )
+              : GradiantButtonWithText(
+                  title: 'Log In',
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      FocusManager.instance.primaryFocus!.unfocus();
+                      isLoading = true;
+                      setState(() {});
+                      await signIn(authProvider);
+                      isLoading = false;
+                      setState(() {});
+                    }
+                  },
+                )
         ],
       ),
     );

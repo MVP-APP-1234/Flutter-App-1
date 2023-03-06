@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/constants/app_bar_with_search_and_notification.dart';
+import 'package:flutter_application_1/constants/app_bar_with_back_and_search.dart';
 import 'package:flutter_application_1/screens/screen_email/widgets/body.dart';
 
 import '../../constants/constants.dart';
@@ -10,7 +10,12 @@ class ScreenEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWithSearchAndNotification(context),
+      appBar: appBarWithBackAndSearch(
+        context,
+        () {
+          Navigator.of(context).pop();
+        },
+      ),
       body: const SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: SafeArea(

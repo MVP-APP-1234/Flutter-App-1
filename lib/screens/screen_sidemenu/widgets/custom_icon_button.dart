@@ -12,22 +12,12 @@ class CustomIconButton extends StatelessWidget {
   final onPressed;
   @override
   Widget build(BuildContext context) {
-    return TextButton.icon(
-      style: TextButton.styleFrom(minimumSize: const Size(double.infinity, 40)),
-      onPressed: onPressed,
-      icon: Image.asset(icon),
-      label: Padding(
-        padding: const EdgeInsets.only(left: 5),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 5),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              label,
-              style: const TextStyle(color: Colors.black),
-            ),
-          ),
-        ),
+    return ListTile(
+      onTap: onPressed,
+      leading: Image.asset(icon),
+      title: Text(
+        label,
+        style: const TextStyle(color: Colors.black),
       ),
     );
   }

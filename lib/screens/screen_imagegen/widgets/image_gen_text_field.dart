@@ -15,7 +15,25 @@ class ImageGenTextField extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-      height: 378,
+      height: () {
+        if (size.width < 300) {
+          return size.height * 0.58;
+        } else if (size.width > 300 && size.width < 370) {
+          return size.height * 0.48;
+        } else if (size.width > 370 && size.width < 380) {
+          return size.height * 0.53;
+        } else if (size.width > 380 && size.width < 500) {
+          return size.height * 0.47;
+        } else if (size.width > 500 && size.width < 550) {
+          return size.height * 0.5;
+        } else if (size.width > 550 && size.width < 800) {
+          return size.height * 0.35;
+        } else if (size.width > 800) {
+          return size.height * 0.3;
+        } else {
+          return size.height * 0.5;
+        }
+      }(),
       width: size.width,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -66,20 +84,24 @@ class ImageGenTextField extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              ElevatedButton.icon(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              SizedBox(
+                height: 40,
+                width: size.width * 0.5,
+                child: ElevatedButton.icon(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
+                    elevation: MaterialStateProperty.all(0),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.purple.shade200),
                   ),
-                  elevation: MaterialStateProperty.all(0),
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.purple.shade200),
+                  onPressed: () {},
+                  icon: Image.asset('assets/icons/auto_generate.png'),
+                  label: const Text('Auto Generate'),
                 ),
-                onPressed: () {},
-                icon: Image.asset('assets/icons/auto_generate.png'),
-                label: const Text('Auto Generate'),
               ),
             ],
           ),

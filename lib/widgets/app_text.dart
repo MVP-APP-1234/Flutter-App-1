@@ -8,7 +8,7 @@ class AppText extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     this.textAlign = TextAlign.start,
   }) : super(key: key);
-  final String title;
+  final String? title;
   final double size;
   final FontWeight fontWeight;
   final TextAlign textAlign;
@@ -19,7 +19,7 @@ class AppText extends StatelessWidget {
       margin: const EdgeInsets.all(0),
       padding: const EdgeInsets.all(0),
       child: Text(
-        title,
+        title!,
         textAlign: textAlign,
         style: TextStyle(
           fontSize: size,

@@ -134,7 +134,11 @@ class ImproveYourMail extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: defaultPadding * 4),
-                    GradiantButtonWithText(title: 'Generate', onPressed: () {}),
+                    GradiantButtonWithText(
+                        title: 'Generate',
+                        onPressed: () {
+                          FocusManager.instance.primaryFocus!.unfocus();
+                        }),
                     const SizedBox(height: defaultPadding * 2),
                   ],
                 ),

@@ -3,6 +3,7 @@ import 'package:flutter_application_1/constants/constants.dart';
 import 'package:flutter_application_1/widgets/app_text.dart';
 import 'package:flutter_application_1/widgets/image_with_text_box.dart';
 
+import '../pages/email_generation.dart';
 import '../pages/improve_your_mail.dart';
 
 class Body extends StatelessWidget {
@@ -11,19 +12,20 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      height: size.height * 0.9,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: defaultPadding + 10),
-          const AppText(
-            title: 'What do you want to create ?',
-            size: 20,
-            fontWeight: FontWeight.bold,
-          ),
-          const SizedBox(height: defaultPadding + 10),
-          Expanded(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: defaultPadding + 10),
+        const AppText(
+          title: 'What do you want to create ?',
+          size: 20,
+          fontWeight: FontWeight.bold,
+        ),
+        const SizedBox(height: defaultPadding + 10),
+        Center(
+          child: SizedBox(
+            height: size.height,
+            width: size.width < 500 ? size.width * 0.9 : size.width * 0.8,
             child: GridView.count(
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
@@ -33,7 +35,14 @@ class Body extends StatelessWidget {
                 ImageWithTextBox(
                   title: 'E-mail',
                   image: 'assets/icons/email_icon_1.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EmailGeneration(),
+                      ),
+                    );
+                  },
                 ),
                 ImageWithTextBox(
                   title: 'Cold Email',
@@ -73,8 +82,8 @@ class Body extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

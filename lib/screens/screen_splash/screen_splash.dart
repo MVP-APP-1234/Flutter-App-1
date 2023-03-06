@@ -6,7 +6,7 @@ class ScreenSplash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // getDataForFuture(context);
+    getDataForFuture(context);
     return Scaffold(
       body: SafeArea(
         child: Container(

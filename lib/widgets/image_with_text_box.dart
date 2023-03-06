@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart';
 import 'app_text.dart';
 
 class ImageWithTextBox extends StatelessWidget {
@@ -18,10 +17,11 @@ class ImageWithTextBox extends StatelessWidget {
   final textAlign;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        padding: const EdgeInsets.all(defaultPadding - 15),
+        padding: const EdgeInsets.all(5),
         height: 90,
         width: 90,
         decoration: BoxDecoration(
@@ -40,12 +40,44 @@ class ImageWithTextBox extends StatelessWidget {
           children: [
             Image.asset(
               image,
-              height: 40,
+              height: () {
+                if (size.width < 300) {
+                  return 20.0;
+                } else if (size.width > 300 && size.width < 500) {
+                  return 40.0;
+                } else if (size.width > 500) {
+                  return 80.0;
+                } else {
+                  return 80.0;
+                }
+              }(),
+              // size.width > 500 ? 80 : 40,
+              width: () {
+                if (size.width < 300) {
+                  return 20.0;
+                } else if (size.width > 300 && size.width < 500) {
+                  return 40.0;
+                } else if (size.width > 500) {
+                  return 80.0;
+                } else {
+                  return 80.0;
+                }
+              }(),
             ),
             AppText(
               title: title,
               textAlign: textAlign,
-              size: 10,
+              size: () {
+                if (size.width < 300) {
+                  return 9.0;
+                } else if (size.width > 300 && size.width < 500) {
+                  return 10.0;
+                } else if (size.width > 500) {
+                  return 16.0;
+                } else {
+                  return 16.0;
+                }
+              }(),
             ),
           ],
         ),

@@ -10,6 +10,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: SafeArea(
@@ -26,7 +27,11 @@ class Body extends StatelessWidget {
                 const SizedBox(height: defaultPadding),
                 Heading('Let\'s sign you in'),
                 const SizedBox(height: defaultPadding - 5),
-                const Text('Welcome back, you have been missed !'),
+                Text(
+                  'Welcome back, you have been missed !',
+                  textAlign:
+                      size.width < 300 ? TextAlign.center : TextAlign.left,
+                ),
                 const SizedBox(height: defaultPadding * 2.5),
                 const TextFieldWithButton(),
                 const SizedBox(height: defaultPadding),
@@ -46,7 +51,7 @@ class Body extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/signup');
+                        Navigator.pushReplacementNamed(context, '/signup');
                       },
                       child: Text(
                         'Sign Up',

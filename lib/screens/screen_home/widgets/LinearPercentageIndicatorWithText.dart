@@ -17,6 +17,7 @@ class LinearPercentageIndicatorWithText extends StatelessWidget {
   final double percentageValue;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -42,7 +43,25 @@ class LinearPercentageIndicatorWithText extends StatelessWidget {
         const SizedBox(height: defaultPadding - 10),
         LinearPercentIndicator(
           barRadius: const Radius.circular(20),
-          width: 300,
+          width: () {
+            if (size.width < 800 && size.width > 700) {
+              return size.width * 0.9;
+            } else if (size.width < 800 && size.width > 700) {
+              return size.width * 0.89;
+            } else if (size.width < 750 && size.width > 500) {
+              return size.width * 0.85;
+            } else if (size.width < 500 && size.width > 400) {
+              return size.width * 0.8;
+            } else if (size.width < 400 && size.width > 370) {
+              return size.width * 0.78;
+            } else if (size.width < 370 && size.width > 300) {
+              return size.width * 0.75;
+            } else if (size.width < 300) {
+              return size.width * 0.7;
+            } else {
+              return 0.0;
+            }
+          }(),
           lineHeight: 15.0,
           percent: percentageValue / 100,
           animation: true,

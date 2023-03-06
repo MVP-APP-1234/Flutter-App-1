@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-InputDecoration defaultTextFieldDecoration(String hintText) {
+// ignore: avoid_init_to_null
+InputDecoration defaultTextFieldDecoration(String hintText,{suffixIcon = null}) {
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     errorBorder: const OutlineInputBorder(
@@ -36,5 +37,6 @@ InputDecoration defaultTextFieldDecoration(String hintText) {
       color: Colors.grey.withOpacity(0.5),
       fontSize: 13,
     ),
+    suffixIcon: suffixIcon,
   );
 }

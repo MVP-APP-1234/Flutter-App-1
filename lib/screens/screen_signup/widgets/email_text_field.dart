@@ -8,10 +8,10 @@ import '../../../../constants/heading.dart';
 import '../../../../widgets/gradiant_button_with_text.dart';
 import '../pages/password_text_field.dart';
 
+// ignore: must_be_immutable
 class EmailTextField extends StatelessWidget {
   EmailTextField({
     Key? key,
-    required this.currentIndex,
   }) : super(key: key);
   int currentIndex = 0;
   @override
@@ -52,6 +52,7 @@ class EmailTextField extends StatelessWidget {
                 const Text('Please enter your email addess'),
                 const SizedBox(height: defaultPadding - 5),
                 TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   decoration: defaultTextFieldDecoration('you@example.com'),
                   validator: (value) {
                     if (value == null || !validator.email(value)) {
@@ -65,12 +66,12 @@ class EmailTextField extends StatelessWidget {
                   title: 'Next',
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
+                      FocusManager.instance.primaryFocus!.unfocus();
                       currentIndex++;
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              PasswordTextField(currentIndex: currentIndex),
+                          builder: (context) => const PasswordTextField(),
                         ),
                       );
                     }

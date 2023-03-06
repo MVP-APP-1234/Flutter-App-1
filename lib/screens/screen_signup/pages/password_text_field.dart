@@ -8,12 +8,31 @@ import '../../../../constants/heading.dart';
 import '../../../../widgets/gradiant_button_with_text.dart';
 import 'username_text_field.dart';
 
-class PasswordTextField extends StatelessWidget {
-  PasswordTextField({
+// ignore: must_be_immutable
+class PasswordTextField extends StatefulWidget {
+  const PasswordTextField({
     Key? key,
-    required this.currentIndex,
   }) : super(key: key);
+
+  @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  TextEditingController passwordController = TextEditingController();
   int currentIndex = 1;
+  bool isSelected = true;
+  void toggleView() {
+    isSelected = !isSelected;
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
@@ -41,9 +60,17 @@ class PasswordTextField extends StatelessWidget {
                   const Text('Please enter a password'),
                   const SizedBox(height: defaultPadding - 5),
                   TextFormField(
-                    obscureText: true,
-                    decoration:
-                        defaultTextFieldDecoration('Minimum 8 characters'),
+                    obscureText: isSelected,
+                    controller: passwordController,
+                    decoration: defaultTextFieldDecoration(
+                      'Minimum 8 characters',
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          toggleView();
+                        },
+                        child: Image.asset('assets/icons/obscure_icon.png'),
+                      ),
+                    ),
                     validator: (value) {
                       if (value == null || !validator.password(value)) {
                         return 'Please enter a valid password';
@@ -56,12 +83,12 @@ class PasswordTextField extends StatelessWidget {
                     title: 'Next',
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
+                        FocusManager.instance.primaryFocus!.unfocus();
                         currentIndex++;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                UsernameTextField(currentIndex: currentIndex),
+                            builder: (context) => const UsernameTextField(),
                           ),
                         );
                       }

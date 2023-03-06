@@ -181,8 +181,11 @@ class _FaceBookStatus1State extends State<FaceBookStatus1> {
                     ),
                     const SizedBox(height: defaultPadding * 4),
                     _isLoading == true
-                        ? const GradiantButtonWithText(
-                            title: 'Generate', onPressed: null)
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.lightBlue,
+                            ),
+                          )
                         : GradiantButtonWithText(
                             title: 'Generate',
                             onPressed: () async {

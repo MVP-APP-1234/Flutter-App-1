@@ -7,7 +7,6 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 0;
-    return EmailTextField(currentIndex: currentIndex);
+    return EmailTextField();
   }
 }

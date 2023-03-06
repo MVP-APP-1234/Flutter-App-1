@@ -11,13 +11,19 @@ import 'screens/screen_home/screen_home.dart';
 import 'screens/screen_imagegen/screen_imagegen.dart';
 import 'screens/screen_signin/screen_signin.dart';
 import 'screens/screen_signup/screen_signup.dart';
-import 'screens/screen_socialmedia/pages/facebook_status_1.dart';
 import 'screens/screen_socialmedia/screen_socialmedia.dart';
 import 'screens/screen_splash/screen_splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyDeEhCFKANYeelDI561blUnuLSazvHMIXw",
+      appId: "1:979000925349:android:39793d2b27f223362f814c",
+      messagingSenderId: "mvpapp0000@gmail.com",
+      projectId: "flutter-application-1-9e1c4",
+    ),
+  );
   runApp(const MyApp());
 }
 
@@ -46,7 +52,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Colors.white,
         ),
-        initialRoute: '/image',
+        // initialRoute: '/social',
         routes: {
           '/': (context) => const ScreenSplash(),
           '/onboarding': (context) => const ScreenOnbaording(),
@@ -57,7 +63,7 @@ class MyApp extends StatelessWidget {
           '/email': (context) => const ScreenEmail(),
           '/social': (context) => const ScreenSocialMedia(),
           '/image': (context) => const ScreenImageGen(),
-          '/demo': (context) => const FaceBookStatus1(),
+          // '/demo': (context) => const FaceBookStatus(),
         },
       ),
     );

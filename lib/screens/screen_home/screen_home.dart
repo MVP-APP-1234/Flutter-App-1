@@ -7,11 +7,11 @@ import '../../constants/app_bar_with_search_and_notification.dart';
 // ignore: must_be_immutable
 class ScreenHome extends StatelessWidget {
   ScreenHome({super.key, this.userName});
-  String? userName;
+  String? userName = 'Username';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWithSearchAndNotification(context),
+      appBar: appBarWithSearchAndNotification(context, userName),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),

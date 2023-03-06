@@ -46,6 +46,7 @@ class PaymentCard extends StatelessWidget {
           const SizedBox(height: 10),
           Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -58,11 +59,11 @@ class PaymentCard extends StatelessWidget {
                     Image.asset(image),
                   ],
                 ),
-                const Spacer(),
                 Image.asset(
                   'assets/images/payment_card_image.png',
-                  height: 180,
-                  width: 180,
+                  height: size.height * 0.3,
+                  width:
+                      size.width < 300 ? size.width * 0.3 : size.width * 0.35,
                   fit: BoxFit.cover,
                 ),
               ],

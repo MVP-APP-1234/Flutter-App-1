@@ -12,6 +12,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Center(
         child: Padding(
@@ -34,7 +35,9 @@ class Body extends StatelessWidget {
                 const Text('- USE -'),
                 const SizedBox(height: defaultPadding),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: size.width > 500
+                      ? MainAxisAlignment.spaceEvenly
+                      : MainAxisAlignment.spaceAround,
                   children: [
                     IconContainerWithTitle(
                       title: 'Phone',

@@ -28,7 +28,7 @@ class _ScreenOnbaordingState extends State<ScreenOnbaording> {
     @override
     // ignore: unused_element
     void initState() {
-      _controller = PageController(initialPage: 0);
+      // _controller = PageController(initialPage: 0);
       super.initState();
     }
 
@@ -89,18 +89,22 @@ class _ScreenOnbaordingState extends State<ScreenOnbaording> {
                         },
                       ),
                     ),
-                    GradiantButtonWithText(
-                      title: 'GET STARTED',
-                      onPressed: () {
-                        if (currentIndex == contents.length - 1) {
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: defaultPadding),
+                      child: GradiantButtonWithText(
+                        title: 'GET STARTED',
+                        onPressed: () {
                           Navigator.pushReplacementNamed(
                               context, '/authentication');
-                        }
-                        _controller.nextPage(
-                          duration: const Duration(milliseconds: 100),
-                          curve: Curves.bounceIn,
-                        );
-                      },
+                          // if (currentIndex == contents.length - 1) {
+                          // }
+                          // _controller.nextPage(
+                          //   duration: const Duration(milliseconds: 100),
+                          //   curve: Curves.bounceIn,
+                          // );
+                        },
+                      ),
                     ),
                     const SizedBox(height: defaultPadding),
                   ],
@@ -110,7 +114,8 @@ class _ScreenOnbaordingState extends State<ScreenOnbaording> {
           );
         }
         return ScreenHome(
-            userName: FirebaseAuth.instance.currentUser!.displayName);
+            userName: FirebaseAuth.instance.currentUser!.displayName ??
+                FirebaseAuth.instance.currentUser!.email);
       },
     );
   }

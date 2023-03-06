@@ -1,13 +1,12 @@
 import 'package:country_phone_code_picker/country_phone_code_picker.dart';
 import 'package:flutter/material.dart';
 
-CountryPhoneCodePicker countryPhoneCodePicker() {
-  CountryController countryController = initializeCountryController();
+CountryPhoneCodePicker countryPhoneCodePicker(context, countryController) {
+  Size size = MediaQuery.of(context).size;
+  
   return CountryPhoneCodePicker.withDefaultSelectedCountry(
     defaultCountryCode:
         Country(name: 'UAE', countryCode: 'AE', phoneCode: ' +971'),
-    height: 60,
-    width: 120,
     errorBorder: const OutlineInputBorder(
       borderSide: BorderSide(
         width: 1,
@@ -45,6 +44,7 @@ CountryPhoneCodePicker countryPhoneCodePicker() {
     ),
     borderColor: Colors.grey.withOpacity(0.5),
     showPhoneCode: true,
+    showFlag: size.width < 300 ? false : true,
     borderRadius: 10,
     borderWidth: 1,
     flagBorderRadius: 5,
