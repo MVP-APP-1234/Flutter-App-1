@@ -53,6 +53,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         // initialRoute: '/social',
+
+        ///Routes
         routes: {
           '/': (context) => const ScreenSplash(),
           '/onboarding': (context) => const ScreenOnbaording(),
